@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "tags": {
+	"name": "pet",
+	"description": "testDescription"
+  },
+  "paths": {
+    "/cplid": {
+      "post": {
+		"tags": ["Line Diagnosis"],
+        "description": "Returns CPL-ID based on postal code, place, district, street, street number, and street suffix.",
+        "summary": "Finds CPL-ID by geographpical indications.",
+        "operationId": "getPetsById",
+        "produces": [
+          "application/json",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+			"schema": {
+				"$ref": "#definitions/ApiResponse"
+			}
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "body",
+          "in": "body",
+          "description": "Object for geographpical indications.",
+          "required": true,
+          "schema": {
+			  "$ref": "#definitions/Geo"
+		  }
+        }
+      ]
+    }
+  },
+  "definitions": {
+	  "ApiResponse": {
+		  "type": "object",
+		  "properties": {
+			"cplID": {
+				"type": "string"
+			}  
+		  }
+	  },
+	  "Geo": {
+		  "type": "object",
+		  "properties": {
+			  "plz": {
+				  "type": "string"
+			  },
+			  "ort": {
+				  "type": "string"  
+			  },
+			  "ortsteil": {
+				  "type": "string"  
+			  },
+			  "strasse": {
+				  "type": "string"  
+			  },
+			  "hsnr": {
+				  "type": "string"  
+			  },
+			  "hsnrZusatz": {
+				  "type": "string"  
+			  }
+		  }
+	  }
+  }
+}

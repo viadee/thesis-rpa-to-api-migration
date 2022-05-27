@@ -1,0 +1,10 @@
+bridge:
+  url: https://platform.uipath.com
+  account-name:
+  tenant-name:
+  folder-path:
+  organization-unit-id:
+  authentication:
+    auth-url: https://account.uipath.com/oauth/token
+    user:
+    key:

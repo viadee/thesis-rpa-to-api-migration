@@ -1,0 +1,24 @@
+spring.datasource.url: jdbc:h2:file:./integration-h2-db
+spring.datasource.driverClassName: org.h2.Driver
+spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto: update
+spring.sql.init.mode: always
+spring.jpa.defer-datasource-initialization: true
+spring.h2.console.enabled: true
+server.port: 8090
+
+camunda.bpm.client:
+  disable-auto-fetching: false
+  max-tasks: 1
+  async-response-timeout: 10000
+  base-url: http://localhost:8080/rest-api # the URL pointing to the Camunda Platform Runtime REST API
+  lock-duration: 18000000 # defines how many milliseconds the External Tasks are locked until they can be fetched again
+  subscriptions:
+    FindCPLIDRobot: # topic name of the External Service Task
+      variable-names: [postalCode, place, district, street, streetNumber, streetSuffix] # our business logic doesn't require any variables, so don't fetch them
+      process-definition-key: line-diagnosis813 # only filter for External Tasks with this process definition key
+    CheckLineOptionsRobot:
+      variable-names: cplID
+      process-definition-key: line-diagnosis813
+
+logging.level.org.camunda.bpm.client: DEBUG # increase the log level of the application
